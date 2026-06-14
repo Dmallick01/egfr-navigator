@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background: deep midnight navy — NOT black, has clear blue character */
+  --bg: #040C20;
+  --surface: rgba(8, 18, 48, 0.70);       /* glass card */
+  --surface-solid: #080F28;               /* opaque surface for fallback */
+  --surface-2: rgba(10, 22, 58, 0.80);
+  --surface-3: #111D3C;
+
+  /* Borders — blue-tinted, not white */
+  --border: rgba(79, 142, 247, 0.10);
+  --border-2: rgba(79, 142, 247, 0.18);
+  --border-glow: rgba(79, 142, 247, 0.06);
+
+  /* Text */
+  --text: #E8EDF8;
+  --text-2: #7D8BAB;
+  --text-3: #424F72;
+
+  /* Scientific visualization palette */
+  --helix: #4F8EF7;        /* alpha helix — PyMOL cartoon blue */
+  --helix-dim: rgba(79, 142, 247, 0.12);
+  --sheet: #FFD166;        /* beta sheet — gold */
+  --sheet-dim: rgba(255, 209, 102, 0.10);
+  --emerald: #00C896;      /* sensitive/responding */
+  --emerald-dim: rgba(0, 200, 150, 0.10);
+  --emerald-light: #00C896;
+  --amber: #FF8C42;        /* resistance */
+  --amber-dim: rgba(255, 140, 66, 0.10);
+  --amber-light: #FF8C42;
+  --violet: #9B59F5;       /* frontier/PROTAC */
+  --violet-dim: rgba(155, 89, 245, 0.10);
+  --violet-light: #9B59F5;
+  --rose: #FF4F7B;         /* danger */
+  /* sky compat aliases */
+  --sky: #4F8EF7;
+  --sky-light: #4F8EF7;
+  --sky-dim: rgba(79, 142, 247, 0.12);
+
+  /* Golden ratio */
+  --phi: 1.618034;
+  /* Fibonacci spacing: 5 8 13 21 34 55 89 144 */
+  --sp-1: 5px;
+  --sp-2: 8px;
+  --sp-3: 13px;
+  --sp-4: 21px;
+  --sp-5: 34px;
+  --sp-6: 55px;
+  --sp-7: 89px;
+  --sp-8: 144px;
+
+  /* Fonts */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Instrument Serif', serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; padding: 0; margin: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.mono, code, pre { font-family: var(--font-mono); }
+
+/* Glass card */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: inset 0 0 0 1px var(--border-glow), 0 4px 32px rgba(0,0,0,0.35);
+  transition: border-color 0.2s ease;
+}
+.glass:hover { border-color: var(--border-2); }
+
+/* Solid card (fallback where glass doesn't work) */
+.card {
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  transition: border-color 0.2s ease;
+}
+.card:hover { border-color: var(--border-2); }
+
+/* Golden ratio divider */
+.divider { height: 1px; background: var(--border); }
+
+/* Tag */
+.tag {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: 99px; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+/* Chip (legacy compat) */
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border-2); background: var(--surface-solid);
+  transition: all 0.15s; cursor: pointer; text-decoration: none; color: var(--text);
+}
+.chip:hover { background: var(--surface-3); border-color: var(--border-2); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(79,142,247,0.20); border-radius: 4px; }
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(13px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fade-up 0.5s ease forwards; }
+.delay-1   { animation-delay: 0.08s; opacity: 0; }
+.delay-2   { animation-delay: 0.16s; opacity: 0; }
+.delay-3   { animation-delay: 0.24s; opacity: 0; }
+.delay-4   { animation-delay: 0.32s; opacity: 0; }
+
+/* Legacy compat aliases */
+.fade-up-1 { animation-delay: 0.05s; opacity: 0; }
+.fade-up-2 { animation-delay: 0.10s; opacity: 0; }
+.fade-up-3 { animation-delay: 0.15s; opacity: 0; }
+.fade-up-4 { animation-delay: 0.20s; opacity: 0; }
+
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in-up { animation: fade-in-up 0.5s ease forwards; }
+
+@keyframes helix-drift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

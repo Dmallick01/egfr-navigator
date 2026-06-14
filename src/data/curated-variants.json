@@ -1,0 +1,494 @@
+[
+  {
+    "id": "exon19del-E746_A750",
+    "hgvs": "NM_005228.5:c.2235_2249del",
+    "hgvs_protein": "NP_005219.2:p.Glu746_Ala750del",
+    "common_name": "Exon 19 deletion (E746_A750del)",
+    "exon": 19,
+    "type": "sensitizing",
+    "position": 746,
+    "ref": "GAATTAAGAGAAGCA",
+    "alt": "-",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000004,
+    "alphamissense_score": 0.94,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.42,
+    "drugs": [
+      {
+        "name": "Gefitinib",
+        "chembl_id": "CHEMBL939",
+        "status": "sensitive",
+        "ic50_nm": 3.2,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": "First approved TKI for EGFR-mutant NSCLC (2003)"
+      },
+      {
+        "name": "Erlotinib",
+        "chembl_id": "CHEMBL553",
+        "status": "sensitive",
+        "ic50_nm": 2.0,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": "FDA approved 2004"
+      },
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 0.5,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI (EGFR, HER2, HER4)",
+        "note": "Second generation; improved exon 19 del outcomes"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 1.0,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI; covalently binds C797",
+        "note": "Now first-line preferred; also active vs T790M"
+      }
+    ],
+    "pubmed_ids": ["16187797", "17409890", "26413624"],
+    "clinvar_id": "16609",
+    "open_targets_score": 0.95,
+    "interpretation": "Exon 19 in-frame deletions (most commonly E746_A750del) account for approximately 45% of activating EGFR mutations in NSCLC. They disrupt the C-helix of the kinase domain, constitutively activating EGFR signaling. These tumors are highly sensitive to all three generations of EGFR TKIs, with osimertinib now preferred as first-line therapy due to CNS penetration and delay of T790M resistance. Resistance most commonly arises through T790M acquisition (~50% of cases).",
+    "structure_note": "Deletion removes a loop region between β3 strand and αC-helix, shifting αC-helix inward and locking kinase in active conformation. PDB 1M17 (erlotinib complex) illustrates the ATP binding pocket.",
+    "pdb_ids": ["1M17", "2ITZ", "4HJO"]
+  },
+  {
+    "id": "L858R",
+    "hgvs": "NM_005228.5:c.2573T>G",
+    "hgvs_protein": "NP_005219.2:p.Leu858Arg",
+    "common_name": "L858R",
+    "exon": 21,
+    "type": "sensitizing",
+    "position": 858,
+    "ref": "T",
+    "alt": "G",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000008,
+    "alphamissense_score": 0.96,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.41,
+    "drugs": [
+      {
+        "name": "Gefitinib",
+        "chembl_id": "CHEMBL939",
+        "status": "sensitive",
+        "ic50_nm": 4.1,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": null
+      },
+      {
+        "name": "Erlotinib",
+        "chembl_id": "CHEMBL553",
+        "status": "sensitive",
+        "ic50_nm": 2.1,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": null
+      },
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 0.8,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": null
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 1.4,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI",
+        "note": "Preferred first-line"
+      },
+      {
+        "name": "CFT8919",
+        "chembl_id": null,
+        "status": "sensitive",
+        "ic50_nm": null,
+        "generation": 4,
+        "mechanism": "Oral allosteric EGFR L858R-selective PROTAC degrader (BiDAC); recruits CRBN E3 ligase",
+        "note": "Phase 1, NCT06641609 (C4 Therapeutics/Betta Pharmaceuticals); active vs L858R/T790M/C797S compound mutants"
+      }
+    ],
+    "pubmed_ids": ["15118073", "15329413", "26413624"],
+    "clinvar_id": "16613",
+    "open_targets_score": 0.96,
+    "interpretation": "L858R is the most common point mutation in EGFR-mutant NSCLC (~41% of sensitizing mutations). The leucine→arginine substitution at position 858 disrupts a hydrophobic interaction in the activation loop, shifting the kinase toward its active conformation. Tumors harboring L858R respond to all generations of TKIs, though L858R tumors may have slightly inferior outcomes to exon 19 del with 1st/2nd gen TKIs. Osimertinib is preferred first-line. CFT8919, a novel PROTAC degrader, is specifically designed to degrade L858R-mutant EGFR, including compound mutants bearing T790M and C797S.",
+    "structure_note": "L858R is located in the activation loop (A-loop) of the kinase domain. The arginine substitution disrupts hydrophobic packing, destabilizing the inactive conformation. PDB 2ITY shows EGFR L858R with gefitinib bound.",
+    "pdb_ids": ["2ITY", "2ITZ", "3IKA"]
+  },
+  {
+    "id": "T790M",
+    "hgvs": "NM_005228.5:c.2369C>T",
+    "hgvs_protein": "NP_005219.2:p.Thr790Met",
+    "common_name": "T790M",
+    "exon": 20,
+    "type": "resistance",
+    "position": 790,
+    "ref": "C",
+    "alt": "T",
+    "clinical_significance": "Drug response",
+    "gnomad_af": 0.000002,
+    "alphamissense_score": 0.88,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.51,
+    "drugs": [
+      {
+        "name": "Gefitinib",
+        "chembl_id": "CHEMBL939",
+        "status": "resistant",
+        "ic50_nm": 950,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": "T790M sterically hinders binding; increased ATP affinity outcompetes drug"
+      },
+      {
+        "name": "Erlotinib",
+        "chembl_id": "CHEMBL553",
+        "status": "resistant",
+        "ic50_nm": 780,
+        "generation": 1,
+        "mechanism": "Reversible ATP-competitive EGFR TKI",
+        "note": "Resistant due to steric clash and altered ATP affinity"
+      },
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "resistant",
+        "ic50_nm": 320,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": "Partially active but insufficient clinical benefit"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 1.5,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI; designed to accommodate T790M bulky methionine",
+        "note": "T790M was the design target for osimertinib; FDA approved 2015 for T790M+ NSCLC"
+      }
+    ],
+    "pubmed_ids": ["16489003", "22452895", "26413624"],
+    "clinvar_id": "40389",
+    "open_targets_score": 0.91,
+    "interpretation": "T790M (Thr790Met) is the most common acquired resistance mechanism to 1st/2nd-generation EGFR TKIs, emerging in approximately 50–60% of patients after initial response. The 'gatekeeper' substitution introduces a bulky methionine side chain, sterically hindering the binding of 1st/2nd-gen TKIs. Simultaneously, T790M increases the kinase's affinity for ATP, making it harder for competitive inhibitors to displace ATP. Osimertinib (AZD9291/Tagrisso) was specifically engineered to accommodate the methionine and covalently bind C797 — it achieves excellent T790M selectivity. T790M can rarely occur as a germline variant associated with hereditary predisposition to lung cancer.",
+    "structure_note": "T790 is the 'gatekeeper' residue at the entrance to the ATP binding pocket. The Thr→Met substitution introduces a bulky hydrophobic group that clashes with the binding mode of 1st/2nd-gen TKIs. PDB 3UG2 shows EGFR T790M with irreversible inhibitor bound.",
+    "pdb_ids": ["3UG2", "4ZAU", "6JTL"]
+  },
+  {
+    "id": "C797S",
+    "hgvs": "NM_005228.5:c.2389T>A",
+    "hgvs_protein": "NP_005219.2:p.Cys797Ser",
+    "common_name": "C797S",
+    "exon": 20,
+    "type": "resistance",
+    "position": 797,
+    "ref": "T",
+    "alt": "A",
+    "clinical_significance": "Drug response",
+    "gnomad_af": 0.000001,
+    "alphamissense_score": 0.82,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.12,
+    "drugs": [
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "resistant",
+        "ic50_nm": 850,
+        "generation": 3,
+        "mechanism": "Irreversible EGFR TKI that covalently binds C797; C797S removes target cysteine",
+        "note": "C797S eliminates the cysteine osimertinib covalently bonds to — primary resistance mechanism after osimertinib"
+      },
+      {
+        "name": "CFT8919",
+        "chembl_id": null,
+        "status": "sensitive",
+        "ic50_nm": null,
+        "generation": 4,
+        "mechanism": "PROTAC/BiDAC degrader: does not need C797 — degrades mutant EGFR via ubiquitin-proteasome system",
+        "note": "Active vs C797S because PROTACs bypass active-site binding requirement; Phase 1 NCT06641609"
+      }
+    ],
+    "pubmed_ids": ["25931448", "28089889", "34672953"],
+    "clinvar_id": null,
+    "open_targets_score": 0.78,
+    "interpretation": "C797S is the primary on-target resistance mechanism to osimertinib (3rd-generation TKI). Osimertinib relies on covalent bond formation with Cys797; C797S replaces this cysteine with serine, abolishing the covalent anchor. When C797S occurs in cis with T790M (on the same allele), no approved ATP-competitive inhibitor can overcome the combined resistance. When in trans (on separate alleles), 1st/2nd-gen and 3rd-gen TKI combinations have been explored. This mutation is the scientific motivation for PROTAC/targeted protein degradation: a bifunctional degrader (like CFT8919) recruits an E3 ligase to ubiquitinate and destroy mutant EGFR, bypassing the need for any specific active-site interaction.",
+    "structure_note": "C797 sits at the edge of the ATP binding pocket in the kinase domain. Osimertinib's acrylamide warhead forms an irreversible covalent bond with C797. The serine substitution eliminates the reactive thiol group, abolishing covalent anchoring. This is the molecular logic behind PROTAC degraders as a solution.",
+    "pdb_ids": ["4ZAU", "6JTL"]
+  },
+  {
+    "id": "G719A",
+    "hgvs": "NM_005228.5:c.2156G>C",
+    "hgvs_protein": "NP_005219.2:p.Gly719Ala",
+    "common_name": "G719A",
+    "exon": 18,
+    "type": "sensitizing",
+    "position": 719,
+    "ref": "G",
+    "alt": "C",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000003,
+    "alphamissense_score": 0.87,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.03,
+    "drugs": [
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 2.1,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": "FDA-approved specifically for uncommon EGFR mutations including G719X"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 3.2,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI",
+        "note": "Clinical data supports activity in uncommon mutations"
+      }
+    ],
+    "pubmed_ids": ["19447859", "32870082"],
+    "clinvar_id": "16612",
+    "open_targets_score": 0.81,
+    "interpretation": "G719A is an uncommon sensitizing mutation in exon 18, located in the phosphate-binding loop (P-loop) of the EGFR kinase domain. G719X mutations (G719A, G719S, G719C, G719D) account for approximately 3% of EGFR mutations in NSCLC. They activate EGFR signaling but with different biochemical properties than classical mutations. Afatinib has specific FDA approval for tumors with G719X, S768I, or L861Q. Osimertinib also shows clinical activity.",
+    "structure_note": "G719 is in the P-loop (glycine-rich loop), critical for orienting the phosphate groups of ATP. Mutation disrupts normal ATP binding and alters kinase conformational dynamics, favoring active state.",
+    "pdb_ids": ["3C9T"]
+  },
+  {
+    "id": "L861Q",
+    "hgvs": "NM_005228.5:c.2582T>A",
+    "hgvs_protein": "NP_005219.2:p.Leu861Gln",
+    "common_name": "L861Q",
+    "exon": 21,
+    "type": "sensitizing",
+    "position": 861,
+    "ref": "T",
+    "alt": "A",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000002,
+    "alphamissense_score": 0.85,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.02,
+    "drugs": [
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 4.0,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": "FDA-approved for L861Q"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 3.5,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI",
+        "note": null
+      }
+    ],
+    "pubmed_ids": ["19447859", "32870082"],
+    "clinvar_id": null,
+    "open_targets_score": 0.79,
+    "interpretation": "L861Q is an uncommon sensitizing mutation in exon 21, adjacent to L858R. It activates EGFR by destabilizing the inactive conformation. L861Q accounts for approximately 2% of EGFR mutations in NSCLC. Afatinib has specific FDA approval for L861Q (along with G719X and S768I uncommon mutations). Osimertinib also shows clinical activity in retrospective data.",
+    "structure_note": "L861 is in the activation loop, adjacent to L858. The glutamine substitution perturbs the inactive kinase conformation, favoring constitutive activation.",
+    "pdb_ids": ["2ITZ"]
+  },
+  {
+    "id": "S768I",
+    "hgvs": "NM_005228.5:c.2303G>T",
+    "hgvs_protein": "NP_005219.2:p.Ser768Ile",
+    "common_name": "S768I",
+    "exon": 20,
+    "type": "sensitizing",
+    "position": 768,
+    "ref": "G",
+    "alt": "T",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000001,
+    "alphamissense_score": 0.83,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.01,
+    "drugs": [
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 1.5,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": "FDA-approved specifically for S768I"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "sensitive",
+        "ic50_nm": 2.0,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI",
+        "note": null
+      }
+    ],
+    "pubmed_ids": ["24565969", "32870082"],
+    "clinvar_id": null,
+    "open_targets_score": 0.77,
+    "interpretation": "S768I is an uncommon activating mutation in exon 20. Unlike exon 20 insertions, S768I is in fact TKI-sensitive, particularly to afatinib (FDA-approved). This distinction is clinically important: not all exon 20 mutations confer resistance. S768I accounts for about 1% of EGFR mutations.",
+    "structure_note": "S768 is located in the kinase domain αC-β4 loop. The isoleucine substitution alters intramolecular contacts, shifting the kinase equilibrium toward the active state.",
+    "pdb_ids": ["2ITZ"]
+  },
+  {
+    "id": "exon20ins-A767_V769dup",
+    "hgvs": "NM_005228.5:c.2299_2307dup",
+    "hgvs_protein": "NP_005219.2:p.Ala767_Val769dup",
+    "common_name": "Exon 20 insertion (A767_V769dup)",
+    "exon": 20,
+    "type": "exon20_insertion",
+    "position": 767,
+    "ref": "-",
+    "alt": "GCAGTGGTG",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.0000005,
+    "alphamissense_score": 0.91,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.04,
+    "drugs": [
+      {
+        "name": "Gefitinib",
+        "chembl_id": "CHEMBL939",
+        "status": "resistant",
+        "ic50_nm": null,
+        "generation": 1,
+        "mechanism": "Reversible EGFR TKI",
+        "note": "Intrinsically resistant — insertion alters drug-binding geometry"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "resistant",
+        "ic50_nm": null,
+        "generation": 3,
+        "mechanism": "Mutant-selective irreversible EGFR TKI",
+        "note": "Largely resistant to exon 20 insertions"
+      },
+      {
+        "name": "Amivantamab",
+        "chembl_id": "CHEMBL4523869",
+        "status": "sensitive",
+        "ic50_nm": null,
+        "generation": null,
+        "mechanism": "Bispecific antibody targeting EGFR + MET; approved for exon 20 insertions",
+        "note": "FDA approved 2021 for NSCLC with EGFR exon 20 insertions (Rybrevant, J&J)"
+      },
+      {
+        "name": "Mobocertinib",
+        "chembl_id": "CHEMBL4523866",
+        "status": "sensitive",
+        "ic50_nm": null,
+        "generation": null,
+        "mechanism": "Selective small-molecule TKI designed for exon 20 insertions",
+        "note": "FDA approved 2021, voluntarily withdrawn by Takeda (Exkivity) in 2023 after trial failed to show benefit vs chemo"
+      }
+    ],
+    "pubmed_ids": ["20727966", "34161699", "35636182"],
+    "clinvar_id": null,
+    "open_targets_score": 0.85,
+    "interpretation": "EGFR exon 20 insertions represent approximately 4–10% of EGFR mutations in NSCLC and are the third most common subtype. Unlike classical sensitizing mutations, most exon 20 insertions are intrinsically resistant to standard TKIs (gefitinib, erlotinib, afatinib, osimertinib). The insertions occur in a loop C-terminal to the αC-helix, creating steric bulk that prevents the conformational change required for TKI binding. Amivantamab (bispecific EGFR/MET antibody, Rybrevant) is FDA-approved for this subtype. Mobocertinib (Exkivity) was approved in 2021 but voluntarily withdrawn by Takeda in 2023 after the EXCLAIM-2 confirmatory trial failed to demonstrate benefit over chemotherapy.",
+    "structure_note": "Exon 20 insertions expand the C-helix loop region, creating steric clash with the drug-binding site. This is fundamentally different from sensitizing mutations and explains intrinsic TKI resistance.",
+    "pdb_ids": ["7L6Z"]
+  },
+  {
+    "id": "exon20ins-D770_N771insSVD",
+    "hgvs": "NM_005228.5:c.2310_2311insTCGGTGGAC",
+    "hgvs_protein": "NP_005219.2:p.Asp770_Asn771insSer_Val_Asp",
+    "common_name": "Exon 20 insertion (D770_N771insSVD)",
+    "exon": 20,
+    "type": "exon20_insertion",
+    "position": 770,
+    "ref": "-",
+    "alt": "TCGGTGGAC",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.0000003,
+    "alphamissense_score": 0.89,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.03,
+    "drugs": [
+      {
+        "name": "Amivantamab",
+        "chembl_id": "CHEMBL4523869",
+        "status": "sensitive",
+        "ic50_nm": null,
+        "generation": null,
+        "mechanism": "Bispecific EGFR/MET antibody; FDA approved for exon 20 insertions",
+        "note": "Active across diverse exon 20 insertion variants"
+      },
+      {
+        "name": "Osimertinib",
+        "chembl_id": "CHEMBL3545063",
+        "status": "resistant",
+        "ic50_nm": null,
+        "generation": 3,
+        "mechanism": "3rd-gen TKI; largely ineffective for exon 20 insertions",
+        "note": null
+      }
+    ],
+    "pubmed_ids": ["20727966", "34161699"],
+    "clinvar_id": null,
+    "open_targets_score": 0.82,
+    "interpretation": "D770_N771insSVD is one of the most common EGFR exon 20 insertion variants. Like other exon 20 insertions, it is intrinsically resistant to standard TKIs. The insertion expands the C-helix loop, preventing the conformational change that TKIs exploit. Amivantamab targets EGFR extracellularly and is active across the diversity of exon 20 insertion variants.",
+    "structure_note": "The insertion adds amino acids between D770 and N771 in the loop following the αC-helix, forcing the helix into a conformation incompatible with classical TKI binding.",
+    "pdb_ids": ["7L6Z"]
+  },
+  {
+    "id": "G719S",
+    "hgvs": "NM_005228.5:c.2155G>A",
+    "hgvs_protein": "NP_005219.2:p.Gly719Ser",
+    "common_name": "G719S",
+    "exon": 18,
+    "type": "sensitizing",
+    "position": 719,
+    "ref": "G",
+    "alt": "A",
+    "clinical_significance": "Pathogenic",
+    "gnomad_af": 0.000002,
+    "alphamissense_score": 0.86,
+    "alphamissense_class": "likely_pathogenic",
+    "tumor_frequency_nsclc": 0.025,
+    "drugs": [
+      {
+        "name": "Afatinib",
+        "chembl_id": "CHEMBL1173655",
+        "status": "sensitive",
+        "ic50_nm": 2.5,
+        "generation": 2,
+        "mechanism": "Irreversible pan-HER TKI",
+        "note": "FDA-approved for G719X mutations including G719S"
+      }
+    ],
+    "pubmed_ids": ["19447859"],
+    "clinvar_id": "16611",
+    "open_targets_score": 0.80,
+    "interpretation": "G719S is a variant of the G719X class (along with G719A, G719C, G719D) in exon 18. It disrupts the phosphate-binding P-loop, constitutively activating EGFR. Afatinib is FDA-approved for G719X NSCLC. Clinical responses are generally lower than with classical mutations (exon 19 del, L858R).",
+    "structure_note": "G719 is in the P-loop (GXGXXG motif). Serine substitution disrupts glycine flexibility required for proper ATP positioning.",
+    "pdb_ids": ["3C9T"]
+  }
+]

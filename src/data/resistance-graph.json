@@ -1,0 +1,168 @@
+{
+  "nodes": [
+    {
+      "id": "sensitizing",
+      "label": "Sensitizing Mutation",
+      "variant_ids": ["exon19del-E746_A750", "L858R"],
+      "description": "Classical activating mutation: Exon 19 deletion or L858R. Constitutively activates EGFR kinase. ~85–90% of TKI-responsive NSCLC.",
+      "position": { "x": 0, "y": 0 },
+      "type": "mutation"
+    },
+    {
+      "id": "1st2nd_gen",
+      "label": "1st / 2nd Gen TKI",
+      "variant_ids": [],
+      "description": "Gefitinib, erlotinib (1st gen) or afatinib, dacomitinib (2nd gen). Competitive ATP-binding or irreversible pan-HER inhibition. Median PFS ~9–14 months.",
+      "position": { "x": 1, "y": 0 },
+      "type": "drug"
+    },
+    {
+      "id": "t790m_acquired",
+      "label": "T790M Acquired",
+      "variant_ids": ["T790M"],
+      "description": "Most common (50–60%) acquired resistance to 1st/2nd gen TKIs. Gatekeeper mutation: bulky Met side chain + increased ATP affinity. Clinical resistance typically at 9–14 months.",
+      "position": { "x": 2, "y": -1 },
+      "type": "mutation"
+    },
+    {
+      "id": "3rd_gen",
+      "label": "Osimertinib (3rd Gen)",
+      "variant_ids": [],
+      "description": "Mutant-selective irreversible EGFR TKI. Designed to accommodate T790M. Covalently binds C797. FDA approved 2015 (T790M+); 2018 (first-line). Median first-line PFS ~18 months.",
+      "position": { "x": 3, "y": -1 },
+      "type": "drug"
+    },
+    {
+      "id": "c797s_acquired",
+      "label": "C797S Acquired",
+      "variant_ids": ["C797S"],
+      "description": "On-target resistance to osimertinib. Removes the cysteine osimertinib covalently bonds to. C797S + T790M in cis = fully resistant to all ATP-competitive TKIs.",
+      "position": { "x": 4, "y": -2 },
+      "type": "mutation"
+    },
+    {
+      "id": "degrader_frontier",
+      "label": "PROTAC Degraders",
+      "variant_ids": ["C797S"],
+      "description": "Next frontier: PROTACs/BiDACs (e.g. CFT8919, Phase 1) bypass active-site resistance by destroying mutant EGFR protein via ubiquitin-proteasome system. Catalytic mechanism — sub-stoichiometric.",
+      "position": { "x": 5, "y": -2 },
+      "type": "frontier"
+    },
+    {
+      "id": "first_line_osimertinib",
+      "label": "Osimertinib 1st-Line",
+      "variant_ids": [],
+      "description": "Osimertinib is now preferred first-line (FLAURA trial). Delays T790M emergence. Superior CNS penetration. Median OS ~38 months.",
+      "position": { "x": 1, "y": 1 },
+      "type": "drug"
+    },
+    {
+      "id": "c797s_firstline",
+      "label": "C797S After 1st-Line Osimertinib",
+      "variant_ids": ["C797S"],
+      "description": "When osimertinib is used first-line, C797S can emerge without prior T790M (in trans with L858R or exon 19 del). Options remain limited.",
+      "position": { "x": 3, "y": 1 },
+      "type": "mutation"
+    },
+    {
+      "id": "exon20_branch",
+      "label": "Exon 20 Insertion",
+      "variant_ids": ["exon20ins-A767_V769dup", "exon20ins-D770_N771insSVD"],
+      "description": "4–10% of EGFR-mutant NSCLC. Intrinsically TKI-resistant. Requires different treatment approach.",
+      "position": { "x": 0, "y": 2 },
+      "type": "mutation"
+    },
+    {
+      "id": "amivantamab",
+      "label": "Amivantamab",
+      "variant_ids": [],
+      "description": "Bispecific EGFR/MET antibody (Rybrevant, J&J). FDA approved 2021 for EGFR exon 20 insertion NSCLC. Targets EGFR extracellularly — immune cell-directed killing, no active-site binding issue.",
+      "position": { "x": 1, "y": 2 },
+      "type": "drug"
+    },
+    {
+      "id": "offtarget_resistance",
+      "label": "Off-Target Resistance",
+      "variant_ids": [],
+      "description": "MET amplification, HER2 amplification, bypass pathway activation, histologic transformation (small cell). Accounts for ~40–50% of osimertinib resistance.",
+      "position": { "x": 4, "y": 0 },
+      "type": "outcome"
+    },
+    {
+      "id": "4th_gen_allosteric",
+      "label": "4th-Gen Allosteric Inhibitors",
+      "variant_ids": [],
+      "description": "EAI045, BLU-701 and related mutant-selective allosteric inhibitors targeting the inactive EGFR conformation. Active vs C797S (don't require active-site binding). In development.",
+      "position": { "x": 5, "y": 0 },
+      "type": "frontier"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sensitizing",
+      "to": "1st2nd_gen",
+      "label": "treated with",
+      "trigger": "drug"
+    },
+    {
+      "from": "1st2nd_gen",
+      "to": "t790m_acquired",
+      "label": "resistance via T790M (~50–60%)",
+      "trigger": "mutation"
+    },
+    {
+      "from": "t790m_acquired",
+      "to": "3rd_gen",
+      "label": "treated with",
+      "trigger": "drug"
+    },
+    {
+      "from": "3rd_gen",
+      "to": "c797s_acquired",
+      "label": "resistance via C797S",
+      "trigger": "mutation"
+    },
+    {
+      "from": "c797s_acquired",
+      "to": "degrader_frontier",
+      "label": "overcome by PROTAC",
+      "trigger": "drug"
+    },
+    {
+      "from": "sensitizing",
+      "to": "first_line_osimertinib",
+      "label": "treated with (1st-line preferred)",
+      "trigger": "drug"
+    },
+    {
+      "from": "first_line_osimertinib",
+      "to": "c797s_firstline",
+      "label": "resistance via C797S",
+      "trigger": "mutation"
+    },
+    {
+      "from": "c797s_firstline",
+      "to": "degrader_frontier",
+      "label": "overcome by PROTAC",
+      "trigger": "drug"
+    },
+    {
+      "from": "3rd_gen",
+      "to": "offtarget_resistance",
+      "label": "off-target resistance (~40–50%)",
+      "trigger": "mutation"
+    },
+    {
+      "from": "offtarget_resistance",
+      "to": "4th_gen_allosteric",
+      "label": "combination strategies",
+      "trigger": "drug"
+    },
+    {
+      "from": "exon20_branch",
+      "to": "amivantamab",
+      "label": "treated with",
+      "trigger": "drug"
+    }
+  ]
+}
