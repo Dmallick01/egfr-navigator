@@ -13,6 +13,12 @@ export default function C797SProteinDegradersPage() {
       date="May 15, 2026"
       tags={["C797S", "PROTAC", "Mechanism"]}
       excerpt="C797S is a single amino acid substitution that defeats osimertinib — and it is also the clearest explanation of why protein degraders (PROTACs) represent a paradigm shift. This post unpacks the molecular logic: why covalent inhibitors need Cys797, how C797S abolishes that requirement, and how a bifunctional degrader like CFT8919 sidesteps the active-site problem entirely."
+      heroImage={{
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/96/Osimertinib.svg",
+        alt: "Chemical structure of osimertinib (Tagrisso / AZD9291), third-generation EGFR TKI",
+        caption: "Osimertinib (AZD9291 / Tagrisso) — the third-generation covalent EGFR inhibitor whose acrylamide warhead binds irreversibly to Cys797. C797S replaces that cysteine with serine, eliminating the nucleophile and defeating this entire mechanism.",
+        credit: "Chemical structure: Public Domain. Source: Wikimedia Commons / PubChem.",
+      }}
     >
       <Section title="One Amino Acid, Three Generation Failure">
         <p style={{ marginBottom: "16px" }}>

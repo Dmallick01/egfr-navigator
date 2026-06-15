@@ -74,6 +74,9 @@ export interface DrugPipelineEntry {
   approved_year: number | null;
   indication: string;
   status: "approved" | "active" | "withdrawn" | "pipeline";
+  molecule_type: "TKI_Gen1" | "TKI_Gen2" | "TKI_Gen3" | "TKI_Gen4" | "Bispecific_Ab" | "PROTAC" | "ADC" | "Exon20_TKI" | "Other";
+  institution?: string;
+  boston_connection?: string | null;
   note: string | null;
 }
 

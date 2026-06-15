@@ -21,9 +21,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "EGFR Resistance Navigator",
+  title: "Dibakar Mallick — EGFR Navigator",
   description:
-    "Explore how EGFR mutations in lung cancer determine drug response and drive resistance — from gefitinib to PROTAC protein degraders.",
+    "Portfolio of Dibakar Mallick — undergraduate researcher building EGFR Navigator, an interactive reference for EGFR mutations, resistance, and PROTAC degraders.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -32,24 +32,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}>
         <Navigation />
         <main>{children}</main>
-        <footer style={{
-          borderTop: "1px solid var(--border)",
-          padding: "34px 24px",
-          marginTop: "89px",
-          textAlign: "center",
-          color: "var(--text-3)",
-          fontSize: "12px",
-          lineHeight: "1.7",
-          fontFamily: "var(--font-body)",
-          background: "rgba(4,12,32,0.60)",
-        }}>
-          <p style={{ marginBottom: 8 }}>
-            For research and educational purposes only — not for clinical decision-making.
-          </p>
-          <p>
-            Data: ClinicalTrials.gov · PubMed · ChEMBL (CC BY-SA) · ClinVar · gnomAD · cBioPortal · Open Targets ·{" "}
-            AlphaMissense (CC BY-NC-SA 4.0, Google DeepMind)
-          </p>
+        <footer className="site-footer">
+          <div className="site-footer-inner">
+            <p className="site-footer-disclaimer">
+              For research and educational purposes only — not for clinical decision-making.
+            </p>
+            <p className="site-footer-meta">
+              Built by{" "}
+              <a href="/about" className="site-footer-link">Dibakar Mallick</a>
+              {" · "}
+              <a href="https://github.com/Dmallick01/egfr-navigator" target="_blank" rel="noopener noreferrer" className="site-footer-link">
+                Source
+              </a>
+            </p>
+          </div>
         </footer>
       </body>
     </html>

@@ -1,308 +1,202 @@
+'use client';
 import Link from 'next/link';
-import HeroCanvas from '@/components/HeroCanvas';
-import TextScramble from '@/components/TextScramble';
+import { VARIANT_CHIPS, typeColor } from '@/lib/variants';
 
-const variants = [
-  { id: 'exon19del-E746_A750',        label: 'Exon 19 del',    sub: '~45% of EGFR mut.',   type: 'sensitizing'      },
-  { id: 'L858R',                       label: 'L858R',          sub: '~41% of EGFR mut.',   type: 'sensitizing'      },
-  { id: 'T790M',                       label: 'T790M',          sub: 'Acquired resistance', type: 'resistance'       },
-  { id: 'C797S',                       label: 'C797S',          sub: 'Osimertinib fails',   type: 'resistance'       },
-  { id: 'G719A',                       label: 'G719A',          sub: 'Uncommon · Exon 18',  type: 'sensitizing'      },
-  { id: 'exon20ins-A767_V769dup',      label: 'Exon 20 ins',    sub: 'TKI-resistant',       type: 'exon20_insertion' },
-  { id: 'L861Q',                       label: 'L861Q',          sub: 'Uncommon · Exon 21',  type: 'sensitizing'      },
-  { id: 'exon20ins-D770_N771insSVD',   label: 'D770_N771ins',   sub: 'Exon 20 insertion',   type: 'exon20_insertion' },
+const demos = [
+  {
+    href: '/variant/C797S',
+    label: 'C797S variant',
+    desc: 'Four-panel view — structure, AlphaMissense, ClinVar evidence, and why osimertinib fails here.',
+    tag: 'Variant explorer',
+  },
+  {
+    href: '/timeline',
+    label: 'Resistance timeline',
+    desc: 'Gefitinib → T790M → osimertinib → C797S → PROTAC. Seven nodes, three TKI generations.',
+    tag: 'Interactive',
+  },
+  {
+    href: '/lab',
+    label: 'In silico lab',
+    desc: 'Pair any variant with a drug. Curated IC50 data and mechanism notes from ChEMBL and trial literature.',
+    tag: 'Sandbox',
+  },
+  {
+    href: '/drugs',
+    label: 'Drug pipeline',
+    desc: '20 agents — TKIs, bispecifics, ADCs, and CFT8919 (Phase 1 PROTAC, NCT06641609).',
+    tag: 'Pipeline',
+  },
 ];
 
-const typeColor: Record<string, { c: string; bg: string; border: string }> = {
-  sensitizing:      { c: 'var(--emerald)',  bg: 'var(--emerald-dim)', border: 'rgba(0,200,150,0.22)'  },
-  resistance:       { c: 'var(--amber)',    bg: 'var(--amber-dim)',   border: 'rgba(255,140,66,0.22)' },
-  exon20_insertion: { c: 'var(--helix)',    bg: 'var(--helix-dim)',   border: 'rgba(79,142,247,0.22)' },
-};
-
-const arc = [
-  {
-    n: '01',
-    title: 'Sensitizing Mutation',
-    body: 'L858R or exon 19 deletion locks EGFR kinase in the active conformation without ligand. Constitutive MAPK and PI3K-AKT signaling drives uncontrolled proliferation.',
-    accent: 'var(--emerald)',
-    link: '/variant/L858R',
-    next: '→ T790M acquired',
-  },
-  {
-    n: '02',
-    title: 'TKI Therapy & Resistance',
-    body: 'Three TKI generations battle successive resistance. T790M steric clash overcomes 1st gen. Then C797S abolishes osimertinib\'s covalent bond — leaving no ATP-competitive options.',
-    accent: 'var(--helix)',
-    link: '/timeline',
-    next: '→ C797S acquired',
-  },
-  {
-    n: '03',
-    title: 'PROTAC Degradation',
-    body: 'CFT8919 bypasses the active site entirely. As a BiDAC, it recruits CRBN E3 ligase, polyubiquitinates mutant EGFR, and sends it to the 26S proteasome — catalytically, sub-stoichiometrically.',
-    accent: 'var(--violet)',
-    link: '/drugs',
-    next: null,
-  },
+const tools = [
+  { name: 'AlphaMissense', role: 'Pathogenicity scores' },
+  { name: 'gnomAD / ClinVar', role: 'Population & clinical variant data' },
+  { name: 'ChEMBL', role: 'Drug IC50 & mechanism' },
+  { name: '3Dmol.js', role: 'Kinase domain structures' },
+  { name: 'Next.js 16', role: 'App architecture' },
+  { name: 'Cursor + Claude', role: 'Development workflow' },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ═══ HERO — full viewport ═══ */}
-      <section style={{
-        position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        overflow: 'hidden',
-      }}>
-        <HeroCanvas />
-
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          maxWidth: 1144,
-          margin: '0 auto',
-          padding: '89px 34px 89px',
-          width: '100%',
-        }}>
-          {/* Golden ratio: text lives in 61.8% of width */}
-          <div style={{ maxWidth: '61.8%' }}>
-
-            {/* Eyebrow tag */}
-            <div className="fade-up" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              marginBottom: 21,
-              padding: '5px 13px 5px 6px',
-              borderRadius: 99,
-              background: 'rgba(79,142,247,0.08)',
-              border: '1px solid rgba(79,142,247,0.20)',
-            }}>
-              <span style={{
-                width: 7, height: 7, borderRadius: '50%',
-                background: 'var(--helix)', display: 'inline-block',
-                boxShadow: '0 0 8px rgba(79,142,247,0.60)',
-              }} />
-              <span style={{
-                fontSize: 11, fontWeight: 600, color: 'var(--helix)',
-                letterSpacing: '0.07em', textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono)',
-              }}>
-                EGFR · NSCLC · Precision Oncology
-              </span>
+      {/* Hero */}
+      <section className="home-hero">
+        <div className="home-hero-inner">
+          <div className="home-hero-grid">
+            <div className="fade-up">
+              <p className="home-kicker">Portfolio · Oncology · Computational Biology</p>
+              <h1 className="home-title">
+                Dibakar <span className="home-title-accent">Mallick</span>
+              </h1>
+              <p className="home-subtitle">
+                Medical &amp; Molecular Biology · BCH Choudhury Lab · BIDMC · MCPHS 2026
+              </p>
+              <p className="home-lead">
+                I built EGFR Navigator because I think EGFR is where targeted oncology is headed — not just
+                third-generation TKIs, but{' '}
+                <Link href="/drugs" className="home-inline-link">PROTAC degraders</Link> that remove the
+                protein entirely. CFT8919 is the compound I watch most closely: a bifunctional degrader that
+                doesn&apos;t need Cys797 to work.
+              </p>
+              <div className="home-cta-row">
+                <Link href="/lab" className="btn-primary">Try the in silico lab</Link>
+                <Link href="/about" className="btn-secondary">About me</Link>
+              </div>
             </div>
 
-            {/* Headline — text scramble */}
-            <h1 className="fade-up delay-1" style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(40px,5.5vw,72px)',
-              fontWeight: 700,
-              lineHeight: 1.06,
-              letterSpacing: '-0.03em',
-              color: 'var(--text)',
-              marginBottom: 21,
-            }}>
-              <TextScramble text="One gene." delay={150} duration={800} tag="span" style={{ display: 'block' }} />
-              <TextScramble text="One mutation." delay={450} duration={900} tag="span" style={{ display: 'block', color: 'var(--helix)' }} />
-              <TextScramble
-                text="A decade of resistance."
-                delay={850}
-                duration={1100}
-                tag="span"
-                style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-serif)',
-                  fontWeight: 400,
-                  fontSize: 'clamp(28px,3.6vw,50px)',
-                  color: 'var(--text-2)',
-                  letterSpacing: '-0.015em',
-                }}
-              />
-            </h1>
-
-            <p className="fade-up delay-2" style={{
-              fontSize: 17, color: 'var(--text-2)', lineHeight: 1.70,
-              marginBottom: 34, maxWidth: 510,
-            }}>
-              Explore how a single EGFR kinase mutation determines drug response,
-              drives acquired resistance, and is being overcome — from the first TKI
-              to PROTAC protein degraders.
-            </p>
-
-            {/* CTAs */}
-            <div className="fade-up delay-3" style={{ display: 'flex', gap: 13, flexWrap: 'wrap', marginBottom: 55 }}>
-              <Link href="/variant/L858R" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '11px 21px',
-                background: 'var(--helix)', color: '#fff',
-                borderRadius: 8, fontWeight: 600, fontSize: 14,
-                textDecoration: 'none', fontFamily: 'var(--font-heading)',
-                letterSpacing: '-0.01em',
-                boxShadow: '0 0 24px rgba(79,142,247,0.25)',
-              }}>
-                Explore Variants →
+            <div className="home-project-card fade-up delay-1">
+              <p className="home-project-label">Flagship project</p>
+              <h2 className="home-project-title">EGFR Navigator</h2>
+              <p className="home-project-desc">
+                A research reference I designed and built — 10 curated variants, interactive pathway and
+                timeline views, a 20-agent drug pipeline, and API integrations across eight public databases.
+              </p>
+              <div className="home-project-stats">
+                <div>
+                  <span className="home-stat-value">10</span>
+                  <span className="home-stat-label">variants</span>
+                </div>
+                <div>
+                  <span className="home-stat-value">8</span>
+                  <span className="home-stat-label">databases</span>
+                </div>
+                <div>
+                  <span className="home-stat-value">20</span>
+                  <span className="home-stat-label">drugs</span>
+                </div>
+              </div>
+              <Link href="/blog/building-egfr-navigator" className="home-project-link">
+                How I built it →
               </Link>
-              <Link href="/timeline" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '11px 21px',
-                background: 'rgba(79,142,247,0.08)',
-                color: 'var(--text)',
-                border: '1px solid var(--border-2)',
-                borderRadius: 8, fontWeight: 500, fontSize: 14,
-                textDecoration: 'none',
-                backdropFilter: 'blur(12px)',
-              }}>
-                Watch Resistance Evolve
-              </Link>
-            </div>
-
-            {/* Fibonacci scroll hint */}
-            <div className="fade-up delay-4" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{
-                width: 1, height: 34,
-                background: 'linear-gradient(to bottom, rgba(79,142,247,0.5), transparent)',
-              }} />
-              <span style={{
-                fontSize: 11, color: 'var(--text-3)',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.06em',
-              }}>
-                scroll to explore
-              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ STATS — Fibonacci 4-col ═══ */}
-      <section style={{ maxWidth: 1144, margin: '0 auto', padding: '0 34px 89px' }}>
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(4,1fr)',
-          gap: 1, background: 'var(--border)',
-          border: '1px solid var(--border)', borderRadius: 13, overflow: 'hidden',
-        }}>
+      {/* Interactive demos */}
+      <section id="explore" className="section-wrap" style={{ paddingTop: 0 }}>
+        <div className="section-header">
+          <h2 className="section-title">Explore the science</h2>
+          <p className="section-desc">
+            Interactive modules — not static reference pages. Start anywhere.
+          </p>
+        </div>
+        <div className="demo-grid">
+          {demos.map((d) => (
+            <Link key={d.href} href={d.href} className="demo-card">
+              <span className="demo-tag">{d.tag}</span>
+              <h3 className="demo-label">{d.label}</h3>
+              <p className="demo-desc">{d.desc}</p>
+              <span className="demo-arrow">→</span>
+            </Link>
+          ))}
+        </div>
+        <div className="science-links-row">
           {[
-            { v: '~85%',   l: 'of TKI-responsive EGFR NSCLC', s: 'Exon 19 del + L858R'          },
-            { v: '3',      l: 'TKI generations',               s: 'Gefitinib → Osimertinib'       },
-            { v: '50–60%', l: 'Acquire T790M',                 s: 'After 1st/2nd gen TKI'         },
-            { v: 'CFT8919',l: 'Phase 1 PROTAC',                s: 'NCT06641609 · CRBN E3 ligase'  },
-          ].map((s, i) => (
-            <div key={i} className="glass" style={{
-              padding: '34px 21px', textAlign: 'center',
-              borderRadius: 0, border: 'none', boxShadow: 'none',
-            }}>
-              <div style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: s.v.length > 5 ? 22 : 38,
-                fontWeight: 700, color: 'var(--text)',
-                letterSpacing: '-0.03em', marginBottom: 8,
-              }}>
-                {s.v}
-              </div>
-              <div style={{ fontSize: 12, color: 'var(--text-2)', fontWeight: 500, marginBottom: 5 }}>{s.l}</div>
-              <div style={{ fontSize: 11, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>{s.s}</div>
+            { href: '/cancer-types', label: 'Cancer types' },
+            { href: '/snp', label: 'SNPs' },
+            { href: '/pathway', label: 'Pathway' },
+            { href: '/papers', label: 'Papers' },
+            { href: '/blog', label: 'Blog' },
+          ].map((l) => (
+            <Link key={l.href} href={l.href} className="science-pill">
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* PROTAC insight */}
+      <section className="section-wrap" style={{ paddingTop: 0 }}>
+        <div className="insight-box">
+          <div className="insight-content">
+            <p className="insight-kicker">Why PROTACs matter</p>
+            <p className="insight-text">
+              Every TKI generation has been defeated by a point mutation at the active site — T790M, then C797S.
+              PROTACs work differently: they recruit an E3 ligase to ubiquitinate and degrade EGFR, so the
+              kinase domain conformation becomes irrelevant.{' '}
+              <Link href="/blog/c797s-protein-degraders" className="home-inline-link">
+                Read my C797S analysis
+              </Link>
+            </p>
+          </div>
+          <div className="insight-stat">
+            <span className="insight-stat-value">CFT8919</span>
+            <span className="insight-stat-sub">Phase 1 · NCT06641609 · CRBN ligase</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Tools & stack */}
+      <section className="section-wrap" style={{ paddingTop: 0 }}>
+        <div className="section-header">
+          <h2 className="section-title">Tools I work with</h2>
+          <p className="section-desc">
+            Wet lab at BCH, clinical research at BIDMC, and computational work across public databases and modern dev tools.
+          </p>
+        </div>
+        <div className="tools-grid">
+          {tools.map((t) => (
+            <div key={t.name} className="tool-item">
+              <span className="tool-name">{t.name}</span>
+              <span className="tool-role">{t.role}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ═══ CURATED VARIANTS ═══ */}
-      <section style={{ maxWidth: 1144, margin: '0 auto', padding: '0 34px 89px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 21 }}>
+      {/* Variants */}
+      <section className="section-wrap" style={{ paddingBottom: 96 }}>
+        <div className="section-header-row">
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 600, color: 'var(--text)', marginBottom: 5 }}>Curated variants</h2>
-            <p style={{ fontSize: 13, color: 'var(--text-2)' }}>
-              10 EGFR variants with clinical evidence, AlphaMissense scores, and drug sensitivity data
+            <h2 className="section-title">EGFR variants</h2>
+            <p className="section-desc" style={{ marginBottom: 0 }}>
+              10 curated mutations with structure, pathogenicity, and drug sensitivity per allele.
             </p>
           </div>
-          <Link href="/variant/L858R" style={{ fontSize: 12, color: 'var(--helix)', textDecoration: 'none', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
-            view all →
+          <Link href="/variant/L858R" className="view-all-link">
+            All variants →
           </Link>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {variants.map(v => {
+        <div className="variant-chips">
+          {VARIANT_CHIPS.map((v) => {
             const tc = typeColor[v.type] || typeColor.sensitizing;
             return (
               <Link
                 key={v.id}
                 href={`/variant/${v.id}`}
-                style={{
-                  display: 'flex', flexDirection: 'column', gap: 4,
-                  padding: '10px 16px', borderRadius: 8,
-                  background: tc.bg, border: `1px solid ${tc.border}`,
-                  textDecoration: 'none', transition: 'all 0.15s',
-                  minWidth: 138,
-                }}
+                className="variant-chip"
+                style={{ background: tc.bg, borderColor: tc.border }}
               >
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 500, color: tc.c }}>{v.label}</span>
-                <span style={{ fontSize: 11, color: 'var(--text-3)' }}>{v.sub}</span>
+                <span className="variant-chip-label" style={{ color: tc.c }}>
+                  {v.label}
+                </span>
+                <span className="variant-chip-sub">{v.sub}</span>
               </Link>
             );
           })}
-        </div>
-      </section>
-
-      {/* ═══ THE ARC — 3 glass cards ═══ */}
-      <section style={{ maxWidth: 1144, margin: '0 auto', padding: '0 34px 144px' }}>
-        <div style={{ marginBottom: 34 }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: 11,
-            color: 'var(--text-3)', letterSpacing: '0.08em',
-            textTransform: 'uppercase', marginBottom: 8,
-          }}>
-            The resistance arc
-          </div>
-          <h2 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
-            From mutation to PROTAC — in three acts
-          </h2>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 13 }}>
-          {arc.map((a, i) => (
-            <Link key={i} href={a.link} className="glass" style={{
-              padding: '34px 21px', textDecoration: 'none', display: 'block',
-              position: 'relative', overflow: 'hidden',
-            }}>
-              {/* Accent top bar */}
-              <div style={{
-                position: 'absolute', top: 0, left: 21, right: 21,
-                height: 2, background: a.accent,
-                borderRadius: '0 0 2px 2px', opacity: 0.55,
-              }} />
-              <div style={{
-                fontFamily: 'var(--font-mono)', fontSize: 11,
-                color: a.accent, marginBottom: 13, letterSpacing: '0.06em',
-              }}>
-                {a.n}
-              </div>
-              <h3 style={{
-                fontFamily: 'var(--font-heading)', fontSize: 17,
-                fontWeight: 600, color: 'var(--text)', marginBottom: 13,
-              }}>
-                {a.title}
-              </h3>
-              <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.65 }}>
-                {a.body}
-              </p>
-              {a.next && (
-                <div style={{
-                  marginTop: 21, fontSize: 11,
-                  color: 'var(--text-3)', fontFamily: 'var(--font-mono)',
-                }}>
-                  {a.next}
-                </div>
-              )}
-            </Link>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 21, textAlign: 'center' }}>
-          <Link href="/timeline" style={{
-            fontSize: 13, color: 'var(--helix)',
-            textDecoration: 'none', fontWeight: 500,
-          }}>
-            See the full resistance timeline →
-          </Link>
         </div>
       </section>
     </>
