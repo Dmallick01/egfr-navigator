@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import GiscusComments from "./GiscusComments";
 
 // ─── Colour map ─────────────────────────────────────────────────────────────
 const COLOR_MAP: Record<string, { border: string; bg: string }> = {
@@ -69,15 +70,23 @@ export function Callout({
 }
 
 // ─── BlogPost layout ──────────────────────────────────────────────────────────
+interface HeroImage {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+}
+
 interface BlogPostProps {
   title: string;
   date: string;
   tags: string[];
   excerpt: string;
+  heroImage?: HeroImage;
   children: ReactNode;
 }
 
-export default function BlogPost({ title, date, tags, excerpt, children }: BlogPostProps) {
+export default function BlogPost({ title, date, tags, excerpt, heroImage, children }: BlogPostProps) {
   return (
     <div
       style={{
@@ -132,7 +141,7 @@ export default function BlogPost({ title, date, tags, excerpt, children }: BlogP
       <h1
         style={{
           fontFamily: "var(--font-heading)",
-          fontSize: "32px",
+          fontSize: "clamp(24px, 5vw, 32px)",
           fontWeight: 700,
           letterSpacing: "-0.02em",
           color: "var(--text)",
@@ -154,6 +163,32 @@ export default function BlogPost({ title, date, tags, excerpt, children }: BlogP
       >
         {date}
       </p>
+
+      {/* Hero image */}
+      {heroImage && (
+        <div style={{ marginBottom: "28px", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--border)", background: "var(--surface-2)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroImage.src}
+            alt={heroImage.alt}
+            style={{ width: "100%", display: "block", maxHeight: "360px", objectFit: "contain", background: "#f8f9fa" }}
+          />
+          {(heroImage.caption || heroImage.credit) && (
+            <div style={{ padding: "10px 16px", borderTop: "1px solid var(--border)" }}>
+              {heroImage.caption && (
+                <p style={{ fontSize: "12px", color: "var(--text-2)", marginBottom: heroImage.credit ? "2px" : "0", lineHeight: 1.5 }}>
+                  {heroImage.caption}
+                </p>
+              )}
+              {heroImage.credit && (
+                <p style={{ fontSize: "10px", fontFamily: "var(--font-mono)", color: "var(--text-3)" }}>
+                  {heroImage.credit}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Excerpt */}
       <p
@@ -180,6 +215,9 @@ export default function BlogPost({ title, date, tags, excerpt, children }: BlogP
 
       {/* Body */}
       <div>{children}</div>
+
+      {/* Giscus comments */}
+      <GiscusComments />
 
       {/* Footer disclaimer */}
       <div

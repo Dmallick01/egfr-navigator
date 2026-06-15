@@ -110,28 +110,11 @@ function Connector({ trigger, label }: { trigger: string; label: string }) {
           borderLeft: `6px solid ${color}`,
           opacity: 0.8,
         }} />
-        {/* Flow dots */}
-        {[0, 1].map(i => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              width: 5, height: 5,
-              borderRadius: '50%',
-              background: color,
-              boxShadow: `0 0 5px ${color}`,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              animation: 'tl-dot 1.7s linear infinite',
-              animationDelay: `${i * 0.85}s`,
-            }}
-          />
-        ))}
       </div>
       {/* Edge label */}
       <span style={{
         fontSize: 7.5,
-        color: 'rgba(255,255,255,0.18)',
+        color: 'var(--text-3)',
         fontFamily: 'var(--font-mono)',
         textAlign: 'center',
         lineHeight: 1.2,
@@ -170,12 +153,12 @@ function NodeCard({
         padding: '11px 13px',
         borderRadius: 9,
         border: `1px solid ${isSelected ? s.color : s.border}`,
-        background: isSelected ? s.bg : 'rgba(4,12,32,0.55)',
-        backdropFilter: 'blur(18px)',
-        WebkitBackdropFilter: 'blur(18px)',
+        background: isSelected ? s.bg : 'rgba(255,255,255,0.80)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         boxShadow: isSelected
           ? `${s.shadow}, 0 4px 16px rgba(0,0,0,0.55)`
-          : '0 2px 8px rgba(0,0,0,0.35)',
+          : '0 1px 4px rgba(0,0,0,0.08)',
         cursor: 'pointer',
         textAlign: 'left',
         transition: 'all 0.18s ease',
@@ -249,7 +232,7 @@ function Lane({
         <span style={{
           fontFamily: 'var(--font-mono)',
           fontSize: 9.5,
-          color: 'rgba(255,255,255,0.18)',
+          color: 'var(--text-3)',
           marginLeft: 10,
         }}>
           {sub}
@@ -314,13 +297,13 @@ function DetailPanel({
   return (
     <div style={{
       marginTop: 24,
-      background: 'rgba(4,12,32,0.70)',
+      background: 'rgba(255,255,255,0.97)',
       border: `1px solid ${s.border}`,
       borderRadius: 12,
       padding: 22,
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
-      boxShadow: `${s.shadow}, 0 8px 32px rgba(0,0,0,0.55)`,
+      boxShadow: s.shadow,
     }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 14 }}>
@@ -418,7 +401,7 @@ function Legend() {
         { label: 'Drug / therapy', color: '#4F8EF7' },
         { label: 'Resistance mutation', color: '#FF8C42' },
         { label: 'Frontier', color: '#9B59F5' },
-        { label: 'Outcome', color: 'rgba(255,255,255,0.38)' },
+        { label: 'Outcome', color: 'var(--text-3)' },
       ].map(item => (
         <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <div style={{ width: 8, height: 8, borderRadius: 2, background: item.color, flexShrink: 0 }} />
@@ -428,11 +411,11 @@ function Legend() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 'auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <div style={{ width: 20, height: 1, background: 'rgba(79,142,247,0.5)' }} />
-          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font-mono)' }}>drug</span>
+          <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>drug</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <div style={{ width: 20, height: 1, background: 'rgba(255,140,66,0.5)' }} />
-          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font-mono)' }}>resistance</span>
+          <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>resistance</span>
         </div>
       </div>
     </div>
@@ -482,14 +465,7 @@ export default function ResistanceTimeline({ graph }: Props) {
         />
       )}
 
-      {/* CSS keyframe for flow dots */}
       <style>{`
-        @keyframes tl-dot {
-          0%   { left: 2px;           opacity: 0; }
-          12%  { opacity: 1; }
-          88%  { opacity: 1; }
-          100% { left: calc(100% - 8px); opacity: 0; }
-        }
         /* hide scrollbars in lane rows */
         div::-webkit-scrollbar { display: none; }
       `}</style>

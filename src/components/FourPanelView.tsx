@@ -304,15 +304,20 @@ export default function FourPanelView({ variant }: Props) {
 
   return (
     <div>
-      {/* Tab bar — always visible, used for mobile switching and desktop labeling */}
-      <div style={{ display: "flex", gap: 2, marginBottom: 20, borderBottom: "1px solid var(--border)", paddingBottom: 0 }}>
+      {/* Tab bar — horizontally scrollable on mobile */}
+      <div style={{
+        display: "flex", gap: 0, marginBottom: 20,
+        borderBottom: "1px solid var(--border)",
+        overflowX: "auto", scrollbarWidth: "none",
+        WebkitOverflowScrolling: "touch",
+      }}>
         {panelLabels.map((p) => (
           <button
             key={p.key}
             onClick={() => setActiveTab(p.key)}
             style={{
-              padding: "8px 14px", background: "none", border: "none", cursor: "pointer",
-              fontSize: 13, fontWeight: 500, whiteSpace: "nowrap",
+              padding: "10px 16px", background: "none", border: "none", cursor: "pointer",
+              fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0,
               color: activeTab === p.key ? "var(--text)" : "var(--text-3)",
               borderBottom: activeTab === p.key ? "2px solid var(--emerald)" : "2px solid transparent",
               transition: "all 0.12s",

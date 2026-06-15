@@ -13,6 +13,12 @@ export default function BuildingEgfrNavigatorPage() {
       date="April 20, 2026"
       tags={["Technical", "Databases", "Design"]}
       excerpt="Behind EGFR Navigator are eight public databases: ClinicalTrials.gov, PubMed, ChEMBL, ClinVar, gnomAD, cBioPortal, Open Targets, and AlphaMissense. This post walks through how each database contributes — from variant frequencies and drug IC50 values to computational pathogenicity predictions and clinical trial identifiers — and the design decisions behind the curated data layer."
+      heroImage={{
+        src: "https://upload.wikimedia.org/wikipedia/commons/5/50/EGFR_signaling_pathway.svg",
+        alt: "EGFR signaling pathway diagram showing RAS/MAPK, PI3K/AKT, and JAK/STAT cascades",
+        caption: "The EGFR signaling cascade — RAS/MAPK, PI3K/AKT, and JAK/STAT pathways downstream of receptor activation. Each node in this diagram represents a data point that EGFR Navigator attempts to contextualize across eight databases.",
+        credit: "Wikimedia Commons. Public Domain.",
+      }}
     >
       <Section title="The Problem: Fragmented Data">
         <p style={{ marginBottom: "16px" }}>

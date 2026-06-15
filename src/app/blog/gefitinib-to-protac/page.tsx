@@ -13,6 +13,12 @@ export default function GefitinibToProtacPage() {
       date="June 1, 2026"
       tags={["History", "PROTAC", "Drug Development"]}
       excerpt="The history of EGFR-targeted therapy in NSCLC is a masterclass in translational oncology. From the serendipitous discovery that gefitinib worked specifically in EGFR-mutant tumors, through the gatekeeper T790M problem and osimertinib's covalent solution, to the PROTAC revolution that renders active-site mutations irrelevant — two decades of drug development compressed into one story."
+      heroImage={{
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/98/126-EpidermalGrowthFactor_EGFR.png",
+        alt: "EGF ligand binding to EGFR receptor — inactive monomer and activated dimer",
+        caption: "EGF (red) binding to EGFR (blue), triggering receptor dimerization and kinase activation. Left: inactive monomer. Right: activated dimer with phosphorylated cytoplasmic tails — the signal that all three generations of TKIs were designed to silence.",
+        credit: "David Goodsell, RCSB PDB Molecule of the Month. CC BY 3.0.",
+      }}
     >
       <Section title="A Story About One Gene">
         <p style={{ marginBottom: "16px" }}>

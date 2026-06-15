@@ -33,7 +33,7 @@ export default async function VariantPage({ params }: { params: Promise<{ id: st
   }
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 24px" }}>
+    <div className="variant-page-wrap" style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 24px" }}>
       {/* Breadcrumb */}
       <nav style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 20, fontSize: 13, color: "var(--text-3)" }}>
         <Link href="/" style={{ color: "var(--text-3)", textDecoration: "none", transition: "color 0.12s" }}>Home</Link>
