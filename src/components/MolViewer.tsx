@@ -3,10 +3,17 @@
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 
+export interface HoverAtomInfo {
+  resi: number;
+  resn: string;
+  chain: string;
+}
+
 interface Props {
   pdbId: string;
   mutationResidue: number;
   mutationLabel: string;
+  onAtomHover?: (info: HoverAtomInfo | null) => void;
 }
 
 // Minimal 3Dmol type surface
@@ -20,6 +27,12 @@ interface Mol3DViewer {
   spin(axis: string, speed?: number): void;
   stopAnimate(): void;
   clear(): void;
+  setHoverable(
+    sel: object,
+    hoverable: boolean,
+    hoverIn: (atom: { resi: number; resn: string; chain: string }) => void,
+    hoverOut: () => void
+  ): void;
 }
 
 declare global {
@@ -32,7 +45,7 @@ declare global {
 
 type Status = 'waiting' | 'loading' | 'ready' | 'error';
 
-export default function MolViewer({ pdbId, mutationResidue, mutationLabel }: Props) {
+export default function MolViewer({ pdbId, mutationResidue, mutationLabel, onAtomHover }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Mol3DViewer | null>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -40,6 +53,9 @@ export default function MolViewer({ pdbId, mutationResidue, mutationLabel }: Pro
   const [spinning, setSpinning] = useState(true);
   // Track whether the 3Dmol script has loaded (persists across PDB switches)
   const scriptLoadedRef = useRef(false);
+  // Stable ref so hover callbacks never capture a stale prop
+  const onAtomHoverRef = useRef(onAtomHover);
+  onAtomHoverRef.current = onAtomHover;
 
   function startViewer(currentPdbId: string, currentResidue: number) {
     if (!containerRef.current || !window.$3Dmol) return;
@@ -93,6 +109,12 @@ export default function MolViewer({ pdbId, mutationResidue, mutationLabel }: Pro
         viewer.zoom(0.80, 600);
         viewer.render();
         viewer.spin('y', 0.6);
+
+        // Hover interaction — fires callback into React parent
+        viewer.setHoverable({}, true,
+          (atom) => { onAtomHoverRef.current?.({ resi: atom.resi, resn: atom.resn, chain: atom.chain }); },
+          () => { onAtomHoverRef.current?.(null); }
+        );
 
         if (alive) setStatus('ready');
       })
